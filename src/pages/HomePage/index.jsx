@@ -1,26 +1,33 @@
-import { useState } from "react";
-import { CartModal } from "../../components/CartModal";
-import { Header } from "../../components/Header";
-import { ProductList } from "../../components/ProductList";
+import { useContext } from "react";
 
-export const HomePage = () => {
-   const [productList, setProductList] = useState([]);
-   const [cartList, setCartList] = useState([]);
+import Cart from "../../components/Cart";
+import Header from "../../components/Header";
+import ProductList from "../../components/ProductsList";
 
-   // useEffect montagem - carrega os produtos da API e joga em productList
-   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
-   // adição, exclusão, e exclusão geral do carrinho
-   // renderizações condições e o estado para exibir ou não o carrinho
-   // filtro de busca
-   // estilizar tudo com sass de forma responsiva
+import { contextDashboard } from "../../context";
 
-   return (
-      <>
-         <Header />
-         <main>
-            <ProductList productList={productList} />
-            <CartModal cartList={cartList} />
-         </main>
-      </>
-   );
+import { Main } from "./style";
+
+const HomePage = () => {
+  const { setFilteredProducts, products, seek } = useContext(contextDashboard);
+
+  return (
+    <>
+      <Header setFilteredProducts={setFilteredProducts} products={products} />
+      <Main className="contentMain">
+        <section className="containerMain__vitrine">
+          {seek.length > 0 && (
+            <h2>
+              Resultado: <span>{seek}</span>
+            </h2>
+          )}
+          <ProductList />
+        </section>
+
+        <Cart />
+      </Main>
+    </>
+  );
 };
+
+export default HomePage;
