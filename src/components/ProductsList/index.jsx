@@ -1,27 +1,32 @@
-import { useContext } from "react";
-import { contextDashboard } from "../../context";
-import Product from "../Product";
-import { ListCard } from "./style";
+import Product from "../Product"
+import './style.css'
 
-const ProductList = () => {
-  const { filteredProducts } = useContext(contextDashboard);
+function ProductList(props) {
 
-  return (
-    <ListCard>
-      {filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => (
-          <Product key={product.id} product={product} />
-        ))
-      ) : (
-        <div className="noProduct">
-          <h1 className="noProduct__description">
-            Desculpe, não foram encontrados produtos para a sua busca... :(
-          </h1>
-          <img src={require("../../assets/empty-state.gif")} alt="" />
+    const products = props.products
+    const searchFilter = props.filteredProducts.toLowerCase()
+
+    return (
+        <div className="containerProducts">
+            {searchFilter === '' ?
+            (<>
+                {products.map((elem) =>
+                    <Product key={elem.id} name={elem.name} category={elem.category} price={elem.price} image={elem.img} handleClick={props.handleClick} id={elem.id}/>
+                   )}
+            </>)
+            :
+            (<>
+                {products.map((elem) => 
+                    elem.name.toLowerCase().includes(searchFilter) || elem.category.toLowerCase().includes(searchFilter) ?
+                    <Product key={elem.id} name={elem.name} category={elem.category} price={elem.price} image={elem.img} handleClick={props.handleClick} id={elem.id}/>
+                    :
+                    console.log('no result')
+                )}
+            </>)
+            }
+            
         </div>
-      )}
-    </ListCard>
-  );
-};
+    )
+}
 
-export default ProductList;
+export default ProductList

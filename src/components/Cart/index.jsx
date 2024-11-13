@@ -1,49 +1,39 @@
-import CartTotal from "../CartTotal";
-import { SectionCart } from "./style";
-import CartProduct from "../CartProduct";
-import { useContext } from "react";
-import { contextDashboard } from "../../context";
+import CardCart from '../CardCart';
+import CartTotal from '../CartTotal';
+import './style.css';
 
-const Cart = () => {
-  const { currentSale, setCurrentSale, cartTotal, setCartTotal } =
-    useContext(contextDashboard);
+function Cart(props) {
 
-  return (
-    <SectionCart currentSale={currentSale}>
-      <header className="headerCart">
-        <h2>Carrinho de compras</h2>
-      </header>
-      <div className="listItens">
-        {currentSale.length === 0 ? (
-          <>
-            <h3>Sua sacola está vazia</h3>
-            <img
-              className="emptyCart__img"
-              src={require("../../assets/astronaut-light-theme.gif")}
-              alt=""
-            />
-          </>
-        ) : (
-          <ul className="listItens__cart">
-            {currentSale.map((product, index) => {
-              return (
-                <CartProduct
-                  key={index}
-                  product={product}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </div>
-      <CartTotal
-        currentSale={currentSale}
-        cartTotal={cartTotal}
-        setCartTotal={setCartTotal}
-        setCurrentSale={setCurrentSale}
-      />
-    </SectionCart>
-  );
-};
+    return (
+        <div className='cart'>
+            {props.currentSale.length < 1 ?
+             (<>
+                <div className='cartTitle'>
+                    <h3 className='cartTitleH3'>Carrinho de compras</h3>
+                </div>
+                <div className='contentCartEmpty'>
+                    <h3 className='contentCartH3'>Sua sacola está vazia</h3>
+                    <p className='contentCartP'>Adicione itens</p>
+                </div>
+            </>)
+            :
+             (<>
+                <div className='cartTitle'>
+                    <h3 className='cartTitleH3'>Carrinho de compras</h3>
+                </div>
+                <div className='contentCart'>
+                    {props.currentSale.map((elem) =>
+                        <CardCart key={elem.id} id={elem.id} currentSale={props.currentSale} name={elem.name} category={elem.category} image={elem.img} setCurrentSale={props.setCurrentSale}/>
+                )}
+                </div>
+                <div className='resumeCart'>
+                    <CartTotal currentSale={props.currentSale} setCurrentSale={props.setCurrentSale}/>
+                </div>
+             </>)
+            }
+            
+        </div>
+    )
+}
 
-export default Cart;
+export default Cart

@@ -1,31 +1,28 @@
-import { useContext } from "react";
-import { contextDashboard } from "../../context";
-import { Card, ProductInfo } from "./style";
+import './style.css'
 
-const Product = ({ product }) => {
-  const { addCart } = useContext(contextDashboard);
+function Product (props) {
 
-  return (
-    <Card>
-      <figure className="containerImage">
-        <img
-          className="containerImage__img"
-          src={product.img}
-          alt={product.name}
-        />
-      </figure>
-      <ProductInfo>
-        <h2 className="productName">{product.name}</h2>
-        <p className="productCategory">{product.category}</p>
-        <span className="productPrice">
-          R$ {product.price.toFixed(2).replace(".", ",")}
-        </span>
-        <button className="productAddCart" onClick={() => addCart(product)}>
-          Adicionar
-        </button>
-      </ProductInfo>
-    </Card>
-  );
-};
+return (
+    <div className='cardProduct'>
+        <figure className='cardProductFig'>
+            <img
+                className='cardProductImg'
+                src={props.image}
+                alt={props.name}
+            />
+        </figure>
+        <h3 className='cardProductTittle'>{props.name}</h3>
+        <small className='cardProductCategory'>{props.category}</small>
+        <h4 className='cardProductPrice'>
+            {Math.abs(props.price).toLocaleString('pt-BR',{
+                style: 'currency',
+                currency: 'BRL'
+            })}
+        </h4>
+        <button className='btnAddCart' onClick={() => props.handleClick(props.id)}>Adicionar</button>
+    </div>
+)
 
-export default Product;
+}
+
+export default Product

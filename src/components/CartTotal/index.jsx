@@ -1,29 +1,29 @@
-import { useContext } from "react";
-import { useEffect } from "react";
-import { contextDashboard } from "../../context";
-import { ContainerTotal } from "./style";
+import './style.css'
 
-const CartTotal = () => {
-  const { currentSale, setCurrentSale, cartTotal, setCartTotal } =
-    useContext(contextDashboard);
+function CartTotal(props) {
 
-  useEffect(() => {
-    setCartTotal(
-      currentSale.reduce((acc, cur) => acc + cur.price * cur.quantity, 0)
-    );
-  }, [currentSale, setCartTotal]);
+    const totalValue = props.currentSale.reduce((valorAnterior, valorAtual) => {
+        return valorAtual.price + valorAnterior;
+    },0)
 
-  return (
-    <ContainerTotal currentSale={currentSale}>
-      <div className="containerTotalValor">
-        <p>Total</p>
-        <span>{cartTotal.toFixed(2).replace(".", ",")}</span>
-      </div>
-      <button className="buttonRemoveItens" onClick={() => setCurrentSale([])}>
-        Remover todos
-      </button>
-    </ContainerTotal>
-  );
-};
+    function clearCart(){
+        return props.setCurrentSale([])
+    }
 
-export default CartTotal;
+    return (
+        <>
+            <div className="cartTotalResume">
+                <h3 className="cartTotalTitle">Total</h3>
+                <h3 className="cartTotalValue">
+                {Math.abs(totalValue).toLocaleString('pt-BR',{
+                                style: 'currency',
+                                currency: 'BRL',
+                            })}
+                </h3>
+            </div>
+            <button className="cartTotalButton" onClick={() => clearCart()}>Remover todos</button>
+        </>
+    )
+}
+
+export default CartTotal
