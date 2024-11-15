@@ -1,39 +1,50 @@
-import CardCart from '../CardCart';
-import CartTotal from '../CartTotal';
-import './style.css';
+import Total from "../TotalCart";
+import { BoxCart, CardContent, CartEmpty, TitleCard, TotalCart } from "./style";
 
-function Cart(props) {
+function Cart({ currentSale, removeCart, setCurrentSale }) {
+  return (
+    <BoxCart>
+      <TitleCard>Carrinho de compras</TitleCard>
 
-    return (
-        <div className='cart'>
-            {props.currentSale.length < 1 ?
-             (<>
-                <div className='cartTitle'>
-                    <h3 className='cartTitleH3'>Carrinho de compras</h3>
-                </div>
-                <div className='contentCartEmpty'>
-                    <h3 className='contentCartH3'>Sua sacola está vazia</h3>
-                    <p className='contentCartP'>Adicione itens</p>
-                </div>
-            </>)
-            :
-             (<>
-                <div className='cartTitle'>
-                    <h3 className='cartTitleH3'>Carrinho de compras</h3>
-                </div>
-                <div className='contentCart'>
-                    {props.currentSale.map((elem) =>
-                        <CardCart key={elem.id} id={elem.id} currentSale={props.currentSale} name={elem.name} category={elem.category} image={elem.img} setCurrentSale={props.setCurrentSale}/>
-                )}
-                </div>
-                <div className='resumeCart'>
-                    <CartTotal currentSale={props.currentSale} setCurrentSale={props.setCurrentSale}/>
-                </div>
-             </>)
-            }
-            
-        </div>
-    )
+      {currentSale.length > 0 ? (
+        <>
+          {currentSale.map((produto) => (
+            <CardContent key={produto.id}>
+              <img alt="img" src={produto.img} />
+
+              <section>
+                <h3>{produto.name}</h3>
+                <p>{produto.category}</p>
+              </section>
+
+              <button
+                onClick={() => {
+                  removeCart(produto);
+                }}
+              >
+                Remover
+              </button>
+            </CardContent>
+          ))}
+          <TotalCart>
+            <Total currentSale={currentSale} />
+            <button
+              onClick={() => {
+                setCurrentSale([]);
+              }}
+            >
+              Remover todos
+            </button>
+          </TotalCart>
+        </>
+      ) : (
+        <CartEmpty>
+          <h2>Sua sacola está vazia</h2>
+          <p>Adicione itens</p>
+        </CartEmpty>
+      )}
+    </BoxCart>
+  );
 }
 
-export default Cart
+export default Cart;

@@ -1,28 +1,30 @@
-import './style.css'
+import { BoxImage, Produto } from "./style";
 
-function Product (props) {
+function Product(props) {
+  return (
+    <Produto id={props.id}>
+      <BoxImage>
+        <img alt="produto" src={props.img} />
+      </BoxImage>
 
-return (
-    <div className='cardProduct'>
-        <figure className='cardProductFig'>
-            <img
-                className='cardProductImg'
-                src={props.image}
-                alt={props.name}
-            />
-        </figure>
-        <h3 className='cardProductTittle'>{props.name}</h3>
-        <small className='cardProductCategory'>{props.category}</small>
-        <h4 className='cardProductPrice'>
-            {Math.abs(props.price).toLocaleString('pt-BR',{
-                style: 'currency',
-                currency: 'BRL'
-            })}
-        </h4>
-        <button className='btnAddCart' onClick={() => props.handleClick(props.id)}>Adicionar</button>
-    </div>
-)
+      <h2>{props.nome}</h2>
+      <p>{props.categoria}</p>
+      <h3>
+        {props.preco.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </h3>
 
+      <button
+        onClick={() => {
+          props.handleClick(props.id);
+        }}
+      >
+        Adicionar
+      </button>
+    </Produto>
+  );
 }
 
-export default Product
+export default Product;

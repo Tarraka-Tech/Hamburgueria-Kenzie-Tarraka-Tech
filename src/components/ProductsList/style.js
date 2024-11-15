@@ -1,57 +1,22 @@
 import styled from "styled-components";
 
+export const List = styled.ul`
+  display: flex;
+  flex-direction: row;
 
-export const ListCard = styled.ul`
-    display: flex;
+  overflow-x: scroll;
 
-    overflow-x: scroll;
-    width: 90%;
-    
-    align-items: center;
-    gap: 1.25rem;
+  padding-inline-start: 20px;
 
-    @media only screen and (min-width: 768px){
-        &{
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
+  @media (min-width: 930px) {
+    width: 900px;
+    flex-wrap: wrap;
 
-            width: 100%;
-            height: 100%;
+    overflow-x: hidden;
+  }
 
-            overflow: visible;
-        }
-    }
-
-    .noProduct{
-        margin: 0 auto;
-    }
-
-    .noProduct__description{
-        font-size: 1.25rem;
-        text-align: center;
-    }
-
-    .noProduct img{
-        width: 300px;
-        
-    }
-
-    &::-webkit-scrollbar-thumb{
-            width: 6px;
-
-            background-color: var(--gray-50);
-
-            border-radius: 5px;
-            
-        }
-
-    &::-webkit-scrollbar{
-        
-        width: 8px;
-
-        background-color: var(--gray-4);
-        
-        border-radius: 5px;
-    }
-`
+  @media (min-width: 1300px) {
+    width: 1150px;
+    margin-left: 50px;
+  }
+`;
