@@ -1,0 +1,17 @@
+.list{
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+    padding: 15px;
+    overflow: auto;
+}
+
+@media(min-width:900px){
+    .list{
+        width: 70%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}

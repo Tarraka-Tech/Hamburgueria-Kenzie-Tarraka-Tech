@@ -1,0 +1,18 @@
+form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input{
+    height: 24px;
+    width: 70%;
+}
+
+@media (min-width: 600px){
+    form{
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+    }
+}

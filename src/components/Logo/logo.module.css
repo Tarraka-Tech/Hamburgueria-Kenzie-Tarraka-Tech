@@ -1,0 +1,8 @@
+.logo{
+    color: var(--color-grey-1);
+}
+
+span{
+    color: var(--color-brand-3);
+    font-size: var(--size-2);
+}

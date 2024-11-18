@@ -1,0 +1,17 @@
+.total{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.total p{
+    font-size: 25px;
+}
+
+@media(min-width:900px){
+    .total{
+        display: flex;
+        justify-content:space-between ;
+    }
+
+}
