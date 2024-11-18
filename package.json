@@ -1,5 +1,5 @@
 {
-  "name": "kenzie-academy-brasil-developers-react-entrega-template-hamburgueria-da-kenzie-msoliver1998",
+  "name": "kenzie-entrega-template-hamburgueria",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "esbuild": "^0.24.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
